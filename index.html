@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>KJC/THBC – Package DApp (CoreV4)</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- ethers v6 -->
+  <script src="https://cdn.jsdelivr.net/npm/ethers@6.13.2/dist/ethers.umd.min.js"></script>
+
+  <script src="config.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <div class="wrap">
+    <div class="top">
+      <div class="brand">
+        <div class="dot"></div>
+        <div>
+          <div class="title">KJC/THBC – Package DApp</div>
+          <div class="muted mono" id="netPill">chainId: -</div>
+        </div>
+      </div>
+
+      <div class="topActions">
+        <button class="btn" id="btnConnect">Connect</button>
+        <a class="pill mono" id="walletScan" target="_blank" rel="noreferrer">-</a>
+        <a class="pill" id="btnBsc" target="_blank" rel="noreferrer">BscScan</a>
+      </div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <div class="grid">
+      <div class="card">
+        <div class="row between">
+          <div class="pill mono">CORE: <span id="coreText">-</span></div>
+          <a class="pill" id="coreScan" target="_blank" rel="noreferrer">Core Scan</a>
+        </div>
+
+        <div class="hr"></div>
+
+        <label class="lbl">Package</label>
+        <select id="pkg" class="inp"></select>
+
+        <div class="row2">
+          <div>
+            <label class="lbl">Side</label>
+            <select id="side" class="inp">
+              <option value="0">Left</option>
+              <option value="1">Right</option>
+            </select>
+          </div>
+          <div>
+            <label class="lbl">USDT Price</label>
+            <input id="price" class="inp mono" disabled value="-" />
+          </div>
+        </div>
+
+        <label class="lbl">Sponsor</label>
+        <input id="sponsor" class="inp mono" placeholder="0x..." />
+
+        <div class="row2">
+          <button class="btn ghost" id="btnApprove">Approve USDT</button>
+          <button class="btn" id="btnBuy">Buy</button>
+        </div>
+
+        <button class="btn ghost" id="btnRefresh">Refresh</button>
+
+        <div class="hr"></div>
+
+        <div class="kv">
+          <div class="k">USDT Balance</div>
+          <div class="v mono" id="usdtBal">-</div>
+        </div>
+        <div class="kv">
+          <div class="k">USDT Allowance</div>
+          <div class="v mono" id="usdtAllow">-</div>
+        </div>
+
+        <div class="hr"></div>
+
+        <div class="kv">
+          <div class="k">My Rank</div>
+          <div class="v mono" id="myRank">-</div>
+        </div>
+        <div class="kv">
+          <div class="k">Status</div>
+          <div class="v mono" id="myStatus">-</div>
+        </div>
+
+        <div class="row2" style="margin-top:10px">
+          <button class="btn ghost" id="btnClaimRef">Claim Referral</button>
+          <button class="btn ghost" id="btnClaimMatch">Claim Matching</button>
+        </div>
+
+        <div class="kv" style="margin-top:10px">
+          <div class="k">Withdrawable</div>
+          <div class="v mono" id="withdrawable">-</div>
+        </div>
+        <div class="kv">
+          <div class="k">Accrued Ref</div>
+          <div class="v mono" id="accRef">-</div>
+        </div>
+        <div class="kv">
+          <div class="k">Accrued Match</div>
+          <div class="v mono" id="accMatch">-</div>
+        </div>
+
+        <div class="hr"></div>
+
+        <div class="refbox">
+          <div class="muted">My Referral Link (Left)</div>
+          <div class="mono ref" id="myRefLeft">-</div>
+          <div class="row2">
+            <button class="btn" id="btnCopyLeft">Copy LEFT</button>
+            <a class="btn ghost" id="btnOpenLeft" target="_blank" rel="noreferrer">Open</a>
+          </div>
+
+          <div class="muted" style="margin-top:12px">My Referral Link (Right)</div>
+          <div class="mono ref" id="myRefRight">-</div>
+          <div class="row2">
+            <button class="btn" id="btnCopyRight">Copy RIGHT</button>
+            <a class="btn ghost" id="btnOpenRight" target="_blank" rel="noreferrer">Open</a>
+          </div>
+
+          <div class="row2" style="margin-top:12px">
+            <button class="btn ghost" id="btnCopyAddr">Copy Address</button>
+            <span class="pill mono" id="wallet">-</span>
+          </div>
+        </div>
+
+        <div class="muted small" id="hint">
+          ถ้าเข้าจากลิงก์ ref ระบบจะล็อค Sponsor และ Side ให้ตาม URL (รองรับ ?ref=...&side=L/R)
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="row between">
+          <div class="pill">My Stakes</div>
+          <div class="pill mono">Count: <span id="stakeCount">0</span></div>
+        </div>
+        <div class="hr"></div>
+
+        <div id="stakeList" class="list"></div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
