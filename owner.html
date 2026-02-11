@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Owner Panel - CoreV4 / EarningsV2</title>
+  <script src="https://cdn.jsdelivr.net/npm/ethers@6.13.2/dist/ethers.umd.min.js"></script>
+  <script src="config.js"></script>
+  <style>
+    body{margin:0;font-family:system-ui;background:#120018;color:#fff}
+    .wrap{max-width:920px;margin:0 auto;padding:18px}
+    .card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:16px;margin:12px 0}
+    .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+    .btn{border:0;border-radius:14px;padding:12px 14px;font-weight:700;cursor:pointer;background:linear-gradient(90deg,#ff4da1,#7c4dff);color:#fff}
+    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,.2)}
+    input,select{width:100%;padding:12px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.18);background:rgba(0,0,0,.25);color:#fff;outline:none}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .mono{font-family:ui-monospace,Menlo,Consolas,monospace}
+    .pill{padding:8px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.14);background:rgba(0,0,0,.22)}
+    #toast{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;min-width:260px;max-width:92vw;
+      padding:12px 14px;border-radius:14px;background:rgba(0,0,0,.78);border:1px solid rgba(54,211,153,.35);
+      opacity:0;pointer-events:none;transition:.18s}
+    #toast.show{opacity:1}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <div class="row" style="justify-content:space-between">
+        <div class="row">
+          <button id="btnConnect" class="btn">Connect</button>
+          <div class="pill mono" id="wallet">-</div>
+          <a id="walletScan" class="btn ghost" target="_blank" rel="noreferrer">BscScan</a>
+        </div>
+        <div class="row">
+          <div class="pill mono" id="net">chainId: -</div>
+          <div class="pill mono" id="isOwner">owner?: -</div>
+        </div>
+      </div>
+      <div style="margin-top:10px" class="mono">
+        CORE: <span id="coreAddr">-</span><br/>
+        EARNINGS: <span id="earnAddr">-</span><br/>
+        earnings.core(): <span id="earnCore">-</span><br/>
+        earnings.owner(): <span id="earnOwner">-</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 style="margin:0 0 10px 0">Offer / Set User (ownerGrantRank)</h3>
+      <div class="grid2">
+        <div>
+          <div style="opacity:.8;margin:0 0 6px 0">Target User</div>
+          <input id="target" placeholder="0x..." />
+        </div>
+        <div>
+          <div style="opacity:.8;margin:0 0 6px 0">Offer Rank (0/1/2/3)</div>
+          <select id="rank">
+            <option value="0">0 = None</option>
+            <option value="1">1 = Bronze</option>
+            <option value="2">2 = Silver</option>
+            <option value="3">3 = Gold</option>
+          </select>
+        </div>
+        <div>
+          <div style="opacity:.8;margin:0 0 6px 0">Active</div>
+          <select id="active">
+            <option value="true">true</option>
+            <option value="false">false</option>
+          </select>
+        </div>
+        <div>
+          <div style="opacity:.8;margin:0 0 6px 0">Preview users(u)</div>
+          <button id="btnCheck" class="btn ghost" style="width:100%">Check Available</button>
+        </div>
+      </div>
+
+      <div class="row" style="margin-top:12px">
+        <button id="btnOffer" class="btn" style="flex:1">Offer / Set User</button>
+      </div>
+
+      <div class="card" style="margin-top:12px">
+        <div class="mono" id="preview">-</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast">-</div>
+  <script src="owner.js"></script>
+</body>
+</html>
